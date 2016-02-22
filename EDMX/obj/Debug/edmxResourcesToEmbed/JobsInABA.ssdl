@@ -1,0 +1,1137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JobsInABAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Achievements">
+    <Key>
+      <PropertyRef Name="AchievementID" />
+    </Key>
+    <Property Name="AchievementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="BusinessID" Type="int" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="Line1" Type="nvarchar" MaxLength="100" />
+    <Property Name="Line2" Type="nvarchar" MaxLength="100" />
+    <Property Name="Line3" Type="nvarchar" MaxLength="100" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="AddressTypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="BusinessAddresses">
+    <Key>
+      <PropertyRef Name="BusinessAddressID" />
+    </Key>
+    <Property Name="BusinessAddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="AddressID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BusinessEmails">
+    <Key>
+      <PropertyRef Name="BusinessEmailID" />
+    </Key>
+    <Property Name="BusinessEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="EmailID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Businesses">
+    <Key>
+      <PropertyRef Name="BusinessID" />
+    </Key>
+    <Property Name="BusinessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Abbreviation" Type="nvarchar" MaxLength="10" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="BusinessTypeID" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="insuser" Type="int" />
+    <Property Name="insdt" Type="datetime" />
+    <Property Name="upduser" Type="int" />
+    <Property Name="upddt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BusinessImages">
+    <Key>
+      <PropertyRef Name="BusinessImageID" />
+    </Key>
+    <Property Name="BusinessImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="ImageID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BusinessPhones">
+    <Key>
+      <PropertyRef Name="BusinessPhoneID" />
+    </Key>
+    <Property Name="BusinessPhoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="PhoneID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BusinessUserMaps">
+    <Key>
+      <PropertyRef Name="BusinessUserMapID" />
+    </Key>
+    <Property Name="BusinessUserMapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="IsOwner" Type="bit" Nullable="false" />
+    <Property Name="BusinessUserTypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="ClassTypes">
+    <Key>
+      <PropertyRef Name="ClassTypeID" />
+    </Key>
+    <Property Name="ClassTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Abbreviation" Type="nvarchar" MaxLength="10" />
+    <Property Name="Code" Type="varchar" MaxLength="10" />
+    <Property Name="PhoneCode" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Educations">
+    <Key>
+      <PropertyRef Name="EducationID" />
+    </Key>
+    <Property Name="EducationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="InstituteName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDelete" Type="bit" />
+  </EntityType>
+  <EntityType Name="Emails">
+    <Key>
+      <PropertyRef Name="EmailID" />
+    </Key>
+    <Property Name="EmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmailTypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Experiences">
+    <Key>
+      <PropertyRef Name="ExperienceID" />
+    </Key>
+    <Property Name="ExperienceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="JobPossition" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="IsCurrent" Type="bit" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ImageTypeID" Type="int" Nullable="false" />
+    <Property Name="ImageExtension" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobApplications">
+    <Key>
+      <PropertyRef Name="JobApplicationID" />
+    </Key>
+    <Property Name="JobApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+    <Property Name="ApplicantUserID" Type="int" Nullable="false" />
+    <Property Name="ApplicationDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobApplicationStates">
+    <Key>
+      <PropertyRef Name="JobApplicationStateID" />
+    </Key>
+    <Property Name="JobApplicationStateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobApplicationID" Type="int" Nullable="false" />
+    <Property Name="JobApplicationStatusID" Type="int" Nullable="false" />
+    <Property Name="insdt" Type="datetime" Nullable="false" />
+    <Property Name="insuser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Jobs">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="JobTypeID" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="insuser" Type="int" />
+    <Property Name="insdt" Type="datetime" />
+    <Property Name="upduser" Type="int" />
+    <Property Name="upddt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LanguageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Phones">
+    <Key>
+      <PropertyRef Name="PhoneID" />
+    </Key>
+    <Property Name="PhoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressbookID" Type="int" Nullable="false" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="Number" Type="varchar" MaxLength="20" />
+    <Property Name="Ext" Type="varchar" MaxLength="10" />
+    <Property Name="PhoneTypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Precedence" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BusinessID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Skills">
+    <Key>
+      <PropertyRef Name="SkillID" />
+    </Key>
+    <Property Name="SkillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Skill" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeCodes">
+    <Key>
+      <PropertyRef Name="TypeCodeID" />
+    </Key>
+    <Property Name="TypeCodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="ClassTypeID" Type="int" Nullable="false" />
+    <Property Name="ParentTypeCodeID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserAccounts">
+    <Key>
+      <PropertyRef Name="UserAccountID" />
+    </Key>
+    <Property Name="UserAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varbinary" MaxLength="250" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="insuser" Type="int" />
+    <Property Name="insdt" Type="datetime" />
+    <Property Name="upduser" Type="int" />
+    <Property Name="upddt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserAddresses">
+    <Key>
+      <PropertyRef Name="UserAddressID" />
+    </Key>
+    <Property Name="UserAddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="AddressID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserEmails">
+    <Key>
+      <PropertyRef Name="UserEmailID" />
+    </Key>
+    <Property Name="UserEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="EmailID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserImages">
+    <Key>
+      <PropertyRef Name="UserImageID" />
+    </Key>
+    <Property Name="UserImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ImageID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserPhones">
+    <Key>
+      <PropertyRef Name="UserPhoneID" />
+    </Key>
+    <Property Name="UserPhoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="PhoneID" Type="int" Nullable="false" />
+    <Property Name="IsPrimary" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="insuser" Type="int" />
+    <Property Name="insdt" Type="datetime" />
+    <Property Name="upduser" Type="int" />
+    <Property Name="upddt" Type="datetime" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_Achievements_Businesses">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="0..1" />
+    <End Role="Achievements" Type="Self.Achievements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="Achievements">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Achievements_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Achievements" Type="Self.Achievements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Achievements">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Countries">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="AddressTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Business_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="1" />
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="Businesses">
+        <PropertyRef Name="BusinessTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Business_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Businesses">
+        <PropertyRef Name="insuser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Business_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Businesses">
+        <PropertyRef Name="upduser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessAddresses_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="1" />
+    <End Role="BusinessAddresses" Type="Self.BusinessAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="BusinessAddresses">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessAddresses_Business">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="BusinessAddresses" Type="Self.BusinessAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="BusinessAddresses">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessEmails_Business">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="BusinessEmails" Type="Self.BusinessEmails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="BusinessEmails">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessEmails_Emails">
+    <End Role="Emails" Type="Self.Emails" Multiplicity="1" />
+    <End Role="BusinessEmails" Type="Self.BusinessEmails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emails">
+        <PropertyRef Name="EmailID" />
+      </Principal>
+      <Dependent Role="BusinessEmails">
+        <PropertyRef Name="EmailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessImages_Business">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="BusinessImages" Type="Self.BusinessImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="BusinessImages">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessImages_Images">
+    <End Role="Images" Type="Self.Images" Multiplicity="1" />
+    <End Role="BusinessImages" Type="Self.BusinessImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ImageID" />
+      </Principal>
+      <Dependent Role="BusinessImages">
+        <PropertyRef Name="ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessPhones_Business">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="BusinessPhones" Type="Self.BusinessPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="BusinessPhones">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessPhones_Phones">
+    <End Role="Phones" Type="Self.Phones" Multiplicity="1" />
+    <End Role="BusinessPhones" Type="Self.BusinessPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phones">
+        <PropertyRef Name="PhoneID" />
+      </Principal>
+      <Dependent Role="BusinessPhones">
+        <PropertyRef Name="PhoneID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessUserMaps_Business">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="BusinessUserMaps" Type="Self.BusinessUserMaps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="BusinessUserMaps">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessUserMaps_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="0..1" />
+    <End Role="BusinessUserMaps" Type="Self.BusinessUserMaps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="BusinessUserMaps">
+        <PropertyRef Name="BusinessUserTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessUserMaps_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="BusinessUserMaps" Type="Self.BusinessUserMaps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BusinessUserMaps">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Educations_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Educations" Type="Self.Educations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Educations">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Emails_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="0..1" />
+    <End Role="Emails" Type="Self.Emails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="Emails">
+        <PropertyRef Name="EmailTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Experiences_Businesses">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="Experiences" Type="Self.Experiences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="Experiences">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Experiences_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Experiences" Type="Self.Experiences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Experiences">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="1" />
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="ImageTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobApplications_Jobs">
+    <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
+    <End Role="JobApplications" Type="Self.JobApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jobs">
+        <PropertyRef Name="JobID" />
+      </Principal>
+      <Dependent Role="JobApplications">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobApplications_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="JobApplications" Type="Self.JobApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="JobApplications">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobApplicationStates__TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="1" />
+    <End Role="JobApplicationStates" Type="Self.JobApplicationStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="JobApplicationStates">
+        <PropertyRef Name="JobApplicationStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobApplicationStates_JobApplications">
+    <End Role="JobApplications" Type="Self.JobApplications" Multiplicity="1" />
+    <End Role="JobApplicationStates" Type="Self.JobApplicationStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobApplications">
+        <PropertyRef Name="JobApplicationID" />
+      </Principal>
+      <Dependent Role="JobApplicationStates">
+        <PropertyRef Name="JobApplicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jobs_Business">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="Jobs">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jobs_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="0..1" />
+    <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="Jobs">
+        <PropertyRef Name="JobTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Languages_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Languages" Type="Self.Languages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Languages">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phones_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="1" />
+    <End Role="Phones" Type="Self.Phones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Phones">
+        <PropertyRef Name="AddressbookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phones_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="0..1" />
+    <End Role="Phones" Type="Self.Phones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="Phones">
+        <PropertyRef Name="PhoneTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Services_Users">
+    <End Role="Businesses" Type="Self.Businesses" Multiplicity="1" />
+    <End Role="Services" Type="Self.Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Businesses">
+        <PropertyRef Name="BusinessID" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="BusinessID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Skills_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Skills" Type="Self.Skills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Skills">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeCodes_ClassTypes">
+    <End Role="ClassTypes" Type="Self.ClassTypes" Multiplicity="1" />
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassTypes">
+        <PropertyRef Name="ClassTypeID" />
+      </Principal>
+      <Dependent Role="TypeCodes">
+        <PropertyRef Name="ClassTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeCodes_TypeCodes">
+    <End Role="TypeCodes" Type="Self.TypeCodes" Multiplicity="0..1" />
+    <End Role="TypeCodes1" Type="Self.TypeCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeCodes">
+        <PropertyRef Name="TypeCodeID" />
+      </Principal>
+      <Dependent Role="TypeCodes1">
+        <PropertyRef Name="ParentTypeCodeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccounts_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserAccounts" Type="Self.UserAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserAccounts">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAddresses_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="1" />
+    <End Role="UserAddresses" Type="Self.UserAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="UserAddresses">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAddresses_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserAddresses" Type="Self.UserAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserAddresses">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEmails_Emails">
+    <End Role="Emails" Type="Self.Emails" Multiplicity="1" />
+    <End Role="UserEmails" Type="Self.UserEmails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emails">
+        <PropertyRef Name="EmailID" />
+      </Principal>
+      <Dependent Role="UserEmails">
+        <PropertyRef Name="EmailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEmails_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserEmails" Type="Self.UserEmails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserEmails">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserImages_Images">
+    <End Role="Images" Type="Self.Images" Multiplicity="1" />
+    <End Role="UserImages" Type="Self.UserImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ImageID" />
+      </Principal>
+      <Dependent Role="UserImages">
+        <PropertyRef Name="ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserImages_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserImages" Type="Self.UserImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserImages">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPhones_Phones">
+    <End Role="Phones" Type="Self.Phones" Multiplicity="1" />
+    <End Role="UserPhones" Type="Self.UserPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phones">
+        <PropertyRef Name="PhoneID" />
+      </Principal>
+      <Dependent Role="UserPhones">
+        <PropertyRef Name="PhoneID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPhones_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserPhones" Type="Self.UserPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserPhones">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Users1" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Users1">
+        <PropertyRef Name="insuser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Users1" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Users1">
+        <PropertyRef Name="upduser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JobsInABAModelStoreContainer">
+    <EntitySet Name="Achievements" EntityType="Self.Achievements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusinessAddresses" EntityType="Self.BusinessAddresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusinessEmails" EntityType="Self.BusinessEmails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Businesses" EntityType="Self.Businesses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusinessImages" EntityType="Self.BusinessImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusinessPhones" EntityType="Self.BusinessPhones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BusinessUserMaps" EntityType="Self.BusinessUserMaps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassTypes" EntityType="Self.ClassTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Educations" EntityType="Self.Educations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Emails" EntityType="Self.Emails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Experiences" EntityType="Self.Experiences" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobApplications" EntityType="Self.JobApplications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobApplicationStates" EntityType="Self.JobApplicationStates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Phones" EntityType="Self.Phones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeCodes" EntityType="Self.TypeCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccounts" EntityType="Self.UserAccounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAddresses" EntityType="Self.UserAddresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserEmails" EntityType="Self.UserEmails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserImages" EntityType="Self.UserImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserPhones" EntityType="Self.UserPhones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Achievements_Businesses" Association="Self.FK_Achievements_Businesses">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="Achievements" EntitySet="Achievements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Achievements_Users" Association="Self.FK_Achievements_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Achievements" EntitySet="Achievements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_TypeCodes" Association="Self.FK_Address_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Business_TypeCodes" Association="Self.FK_Business_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="Businesses" EntitySet="Businesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Business_Users" Association="Self.FK_Business_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Businesses" EntitySet="Businesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Business_Users1" Association="Self.FK_Business_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Businesses" EntitySet="Businesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessAddresses_Address" Association="Self.FK_BusinessAddresses_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="BusinessAddresses" EntitySet="BusinessAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessAddresses_Business" Association="Self.FK_BusinessAddresses_Business">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="BusinessAddresses" EntitySet="BusinessAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessEmails_Business" Association="Self.FK_BusinessEmails_Business">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="BusinessEmails" EntitySet="BusinessEmails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessEmails_Emails" Association="Self.FK_BusinessEmails_Emails">
+      <End Role="Emails" EntitySet="Emails" />
+      <End Role="BusinessEmails" EntitySet="BusinessEmails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessImages_Business" Association="Self.FK_BusinessImages_Business">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="BusinessImages" EntitySet="BusinessImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessImages_Images" Association="Self.FK_BusinessImages_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="BusinessImages" EntitySet="BusinessImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessPhones_Business" Association="Self.FK_BusinessPhones_Business">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="BusinessPhones" EntitySet="BusinessPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessPhones_Phones" Association="Self.FK_BusinessPhones_Phones">
+      <End Role="Phones" EntitySet="Phones" />
+      <End Role="BusinessPhones" EntitySet="BusinessPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessUserMaps_Business" Association="Self.FK_BusinessUserMaps_Business">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="BusinessUserMaps" EntitySet="BusinessUserMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessUserMaps_TypeCodes" Association="Self.FK_BusinessUserMaps_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="BusinessUserMaps" EntitySet="BusinessUserMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessUserMaps_Users" Association="Self.FK_BusinessUserMaps_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BusinessUserMaps" EntitySet="BusinessUserMaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Educations_Users" Association="Self.FK_Educations_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Educations" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Emails_TypeCodes" Association="Self.FK_Emails_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="Emails" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Experiences_Businesses" Association="Self.FK_Experiences_Businesses">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="Experiences" EntitySet="Experiences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Experiences_Users" Association="Self.FK_Experiences_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Experiences" EntitySet="Experiences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_TypeCodes" Association="Self.FK_Images_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobApplications_Jobs" Association="Self.FK_JobApplications_Jobs">
+      <End Role="Jobs" EntitySet="Jobs" />
+      <End Role="JobApplications" EntitySet="JobApplications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobApplications_Users" Association="Self.FK_JobApplications_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="JobApplications" EntitySet="JobApplications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobApplicationStates__TypeCodes" Association="Self.FK_JobApplicationStates__TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="JobApplicationStates" EntitySet="JobApplicationStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobApplicationStates_JobApplications" Association="Self.FK_JobApplicationStates_JobApplications">
+      <End Role="JobApplications" EntitySet="JobApplications" />
+      <End Role="JobApplicationStates" EntitySet="JobApplicationStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jobs_Business" Association="Self.FK_Jobs_Business">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="Jobs" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jobs_TypeCodes" Association="Self.FK_Jobs_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="Jobs" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Languages_Users" Association="Self.FK_Languages_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Languages" EntitySet="Languages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phones_Address" Association="Self.FK_Phones_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Phones" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phones_TypeCodes" Association="Self.FK_Phones_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="Phones" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Services_Users" Association="Self.FK_Services_Users">
+      <End Role="Businesses" EntitySet="Businesses" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Skills_Users" Association="Self.FK_Skills_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Skills" EntitySet="Skills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeCodes_ClassTypes" Association="Self.FK_TypeCodes_ClassTypes">
+      <End Role="ClassTypes" EntitySet="ClassTypes" />
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeCodes_TypeCodes" Association="Self.FK_TypeCodes_TypeCodes">
+      <End Role="TypeCodes" EntitySet="TypeCodes" />
+      <End Role="TypeCodes1" EntitySet="TypeCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccounts_Users" Association="Self.FK_UserAccounts_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAddresses_Address" Association="Self.FK_UserAddresses_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="UserAddresses" EntitySet="UserAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAddresses_Users" Association="Self.FK_UserAddresses_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserAddresses" EntitySet="UserAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEmails_Emails" Association="Self.FK_UserEmails_Emails">
+      <End Role="Emails" EntitySet="Emails" />
+      <End Role="UserEmails" EntitySet="UserEmails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEmails_Users" Association="Self.FK_UserEmails_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserEmails" EntitySet="UserEmails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserImages_Images" Association="Self.FK_UserImages_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="UserImages" EntitySet="UserImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserImages_Users" Association="Self.FK_UserImages_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserImages" EntitySet="UserImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPhones_Phones" Association="Self.FK_UserPhones_Phones">
+      <End Role="Phones" EntitySet="Phones" />
+      <End Role="UserPhones" EntitySet="UserPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPhones_Users" Association="Self.FK_UserPhones_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserPhones" EntitySet="UserPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Users" Association="Self.FK_Users_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users1" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Users1" Association="Self.FK_Users_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users1" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

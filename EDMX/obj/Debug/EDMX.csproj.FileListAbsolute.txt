@@ -1,0 +1,10 @@
+D:\Hardik Working\TEST\Testing\EDMX\bin\Debug\EDMX.dll.config
+D:\Hardik Working\TEST\Testing\EDMX\bin\Debug\EDMX.dll
+D:\Hardik Working\TEST\Testing\EDMX\bin\Debug\EDMX.pdb
+D:\Hardik Working\TEST\Testing\EDMX\bin\Debug\EntityFramework.dll
+D:\Hardik Working\TEST\Testing\EDMX\bin\Debug\EntityFramework.SqlServer.dll
+D:\Hardik Working\TEST\Testing\EDMX\bin\Debug\EntityFramework.xml
+D:\Hardik Working\TEST\Testing\EDMX\bin\Debug\EntityFramework.SqlServer.xml
+D:\Hardik Working\TEST\Testing\EDMX\obj\Debug\EDMX.dll
+D:\Hardik Working\TEST\Testing\EDMX\obj\Debug\EDMX.pdb
+D:\Hardik Working\TEST\Testing\EDMX\obj\Debug\EDMX.csprojResolveAssemblyReference.cache

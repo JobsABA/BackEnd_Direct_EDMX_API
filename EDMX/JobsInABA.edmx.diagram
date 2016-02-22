@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db56dda231974cac96f6e4b21063d196" Name="Diagram1">
+        <EntityTypeShape EntityType="JobsInABAModel.Achievement" Width="1.5" PointX="3" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Address" Width="1.5" PointX="1.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.BusinessAddress" Width="1.5" PointX="8.25" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.BusinessEmail" Width="1.5" PointX="8.25" PointY="33.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Business" Width="1.5" PointX="6" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.BusinessImage" Width="1.5" PointX="11.25" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.BusinessPhone" Width="1.5" PointX="11.25" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.ClassType" Width="1.5" PointX="1.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Country" Width="1.5" PointX="1.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Education" Width="1.5" PointX="3" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Email" Width="1.5" PointX="3.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Experience" Width="1.5" PointX="14.25" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Image" Width="1.5" PointX="9" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.JobApplication" Width="1.5" PointX="16.5" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.JobApplicationState" Width="1.5" PointX="18.75" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Job" Width="1.5" PointX="14.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Language" Width="1.5" PointX="3" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Phone" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Role" Width="1.5" PointX="6.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Service" Width="1.5" PointX="8.25" PointY="53.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.Skill" Width="1.5" PointX="3" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.TypeCode" Width="1.5" PointX="1.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.UserAccount" Width="1.5" PointX="3" PointY="43.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.UserAddress" Width="1.5" PointX="3" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.UserEmail" Width="1.5" PointX="6" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.UserImage" Width="1.5" PointX="6" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.UserPhone" Width="1.5" PointX="3" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.UserRole" Width="1.5" PointX="9" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsInABAModel.User" Width="1.5" PointX="0.75" PointY="27.625" IsExpanded="true" />
+        <AssociationConnector Association="JobsInABAModel.FK_Achievements_Businesses" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Achievements_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Address_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Address_TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessAddresses_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Phones_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserAddresses_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessAddresses_Business" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessEmails_Business" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessEmails_Emails" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Business_TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Business_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Business_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessImages_Business" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessPhones_Business" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Experiences_Businesses" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Jobs_Business" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Services_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessImages_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessPhones_Phones" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_TypeCodes_ClassTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Educations_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Emails_TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserEmails_Emails" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Experiences_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Images_TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserImages_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_JobApplications_Jobs" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_JobApplications_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_JobApplicationStates_JobApplications" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_JobApplicationStates__TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Jobs_TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Languages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Phones_TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserPhones_Phones" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserRoles_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Skills_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_TypeCodes_TypeCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserAccounts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserAddresses_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserEmails_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserImages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserPhones_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_UserRoles_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Users_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsInABAModel.FK_Users_Users1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="JobsInABAModel.BusinessUserMap" Width="1.5" PointX="8.25" PointY="18.375" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessUserMaps_Business" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessUserMaps_TypeCodes" />
+        <AssociationConnector Association="JobsInABAModel.FK_BusinessUserMaps_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

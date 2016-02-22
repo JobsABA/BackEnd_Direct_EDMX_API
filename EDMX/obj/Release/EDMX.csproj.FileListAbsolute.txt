@@ -1,0 +1,9 @@
+D:\Hardik Working\TEST\Testing\EDMX\bin\Release\EDMX.dll.config
+D:\Hardik Working\TEST\Testing\EDMX\bin\Release\EDMX.dll
+D:\Hardik Working\TEST\Testing\EDMX\bin\Release\EDMX.pdb
+D:\Hardik Working\TEST\Testing\EDMX\bin\Release\EntityFramework.dll
+D:\Hardik Working\TEST\Testing\EDMX\bin\Release\EntityFramework.SqlServer.dll
+D:\Hardik Working\TEST\Testing\EDMX\bin\Release\EntityFramework.xml
+D:\Hardik Working\TEST\Testing\EDMX\bin\Release\EntityFramework.SqlServer.xml
+D:\Hardik Working\TEST\Testing\EDMX\obj\Release\EDMX.dll
+D:\Hardik Working\TEST\Testing\EDMX\obj\Release\EDMX.pdb
