@@ -92,25 +92,38 @@ namespace Testing.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetJobsinABAList()
+        public JsonResult GetJobsinABAList(string city, string company, string jobKeyword, int? userID)
         {
             Dictionary<string, object> res = new Dictionary<string, object>();
             try
             {
+                if (!userID.HasValue) userID = 0;
                 var record = db.Jobs.AsEnumerable().Where(x => x.IsActive == true && x.IsDeleted == false).Select(x => new
                 {
                     Title = x.Title,
                     BusinessID = x.BusinessID,
+                    BusinessName = x.Business != null ? x.Business.Name : "",
                     Description = x.Description,
                     StartDate = x.StartDate,
                     EndDate = x.EndDate,
                     Name = db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault() != null ? db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault().Name : "",
                     JobID = x.JobID,
-                    ImageExtension = x.Business.BusinessImages.FirstOrDefault() != null ? x.Business.BusinessImages.FirstOrDefault().Image != null ? x.Business.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : ""
+                    ImageExtension = x.Business.BusinessImages.FirstOrDefault() != null ? x.Business.BusinessImages.FirstOrDefault().Image != null ? x.Business.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : "",
+                    City = x.Business != null ? x.Business.BusinessAddresses != null ? x.Business.BusinessAddresses.FirstOrDefault() != null ? x.Business.BusinessAddresses.FirstOrDefault().Address != null ? x.Business.BusinessAddresses.FirstOrDefault().Address.City : "" : "" : "" : "",
+                    IsBusinessOwner = db.BusinessUserMaps.Where(c => c.UserID == userID && c.BusinessID == x.BusinessID && c.IsOwner == true).Count(),
 
                     //Location = x.Business.BusinessAddresses.FirstOrDefault().Address.City
 
                 }).ToList();
+
+                if (!string.IsNullOrEmpty(jobKeyword))
+                    record = record.Where(x => x.Title != null && x.Title.ToLower().Contains(jobKeyword.ToLower())).ToList();
+
+                if (!string.IsNullOrEmpty(city))
+                    record = record.Where(x => x.City != null && x.City.ToLower().Contains(city.ToLower())).ToList();
+
+                if (!string.IsNullOrEmpty(company))
+                    record = record.Where(x => x.BusinessName != null && x.BusinessName.ToLower().Contains(company.ToLower())).ToList();
 
                 res["success"] = 1;
                 res["JobsList"] = record;
@@ -125,37 +138,37 @@ namespace Testing.Controllers
         }
 
         //get job list for login user
-        public JsonResult GetJobsinABAListWithOwnerList(int userID)
-        {
-            Dictionary<string, object> res = new Dictionary<string, object>();
-            try
-            {
-                var record = db.Jobs.AsEnumerable().Where(x => x.IsActive == true && x.IsDeleted == false).Select(x => new
-                {
-                    Title = x.Title,
-                    BusinessID = x.BusinessID,
-                    Description = x.Description,
-                    StartDate = x.StartDate,
-                    EndDate = x.EndDate,
-                    Name = db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault() != null ? db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault().Name : "",
-                    JobID = x.JobID,
-                    IsBusinessOwner = db.BusinessUserMaps.Where(c => c.UserID == userID && c.BusinessID == x.BusinessID && c.IsOwner == true).Count(),
-                    ImageExtension = x.Business.BusinessImages.FirstOrDefault() != null ? x.Business.BusinessImages.FirstOrDefault().Image != null ? x.Business.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : ""
-                    //Location = x.Business.BusinessAddresses.FirstOrDefault().Address.City
+        //public JsonResult GetJobsinABAListWithOwnerList(int userID)
+        //{
+        //    Dictionary<string, object> res = new Dictionary<string, object>();
+        //    try
+        //    {
+        //        var record = db.Jobs.AsEnumerable().Where(x => x.IsActive == true && x.IsDeleted == false).Select(x => new
+        //        {
+        //            Title = x.Title,
+        //            BusinessID = x.BusinessID,
+        //            Description = x.Description,
+        //            StartDate = x.StartDate,
+        //            EndDate = x.EndDate,
+        //            Name = db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault() != null ? db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault().Name : "",
+        //            JobID = x.JobID,
+        //            IsBusinessOwner = db.BusinessUserMaps.Where(c => c.UserID == userID && c.BusinessID == x.BusinessID && c.IsOwner == true).Count(),
+        //            ImageExtension = x.Business.BusinessImages.FirstOrDefault() != null ? x.Business.BusinessImages.FirstOrDefault().Image != null ? x.Business.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : ""
+        //            //Location = x.Business.BusinessAddresses.FirstOrDefault().Address.City
 
-                }).ToList();
+        //        }).ToList();
 
-                res["success"] = 1;
-                res["JobsList"] = record;
+        //        res["success"] = 1;
+        //        res["JobsList"] = record;
 
-            }
-            catch (Exception ex)
-            {
-                res["error"] = 1;
-                res["message"] = "Error in fetching Job list";
-            }
-            return Json(res, JsonRequestBehavior.AllowGet);
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res["error"] = 1;
+        //        res["message"] = "Error in fetching Job list";
+        //    }
+        //    return Json(res, JsonRequestBehavior.AllowGet);
+        //}
 
         public JsonResult GetJobsinABAListByBussinessId(int bussinessID)
         {

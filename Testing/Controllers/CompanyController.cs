@@ -132,7 +132,7 @@ namespace Testing.Controllers
                     {
                         if (!string.IsNullOrEmpty(company.BusinessAddressLine1) || !string.IsNullOrEmpty(company.BusinessAddressCity) || !string.IsNullOrEmpty(company.BusinessAddressState) || !string.IsNullOrEmpty(company.BusinessAddressZipCode))
                         {
-                            
+
                             if (oAddress != null)
                             {
                                 oAddress.Line1 = company.BusinessAddressLine1;
@@ -219,7 +219,7 @@ namespace Testing.Controllers
 
         }
 
-        public JsonResult GetBusinessList(string term)
+        public JsonResult GetBusinessList(string term, string companyName, string City)
         {
             Dictionary<string, object> res = new Dictionary<string, object>();
             try
@@ -228,13 +228,22 @@ namespace Testing.Controllers
                 if (!string.IsNullOrEmpty(term))
                     lstBusiness = lstBusiness.Where(x => x.Name != null && x.Name.ToLower().Contains(term.ToLower())).ToList();
 
+                if (!string.IsNullOrEmpty(companyName))
+                {
+                    lstBusiness = lstBusiness.Where(x => x.Name != null && x.Name.ToLower().Contains(companyName.ToLower())).ToList();
+                }
+
                 var record = lstBusiness.AsEnumerable().Select(x => new
                 {
                     Name = x.Name,
                     BusinessID = x.BusinessID,
                     Description = x.Description,
-                    ImageExtension = x.BusinessImages.FirstOrDefault() != null ? x.BusinessImages.FirstOrDefault().Image != null ? x.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : ""
+                    ImageExtension = x.BusinessImages.FirstOrDefault() != null ? x.BusinessImages.FirstOrDefault().Image != null ? x.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : "",
+                    City = x.BusinessAddresses.FirstOrDefault() != null ? x.BusinessAddresses.FirstOrDefault().Address != null ? x.BusinessAddresses.FirstOrDefault().Address.City : "" : "",
                 }).ToList();
+
+                if (!string.IsNullOrEmpty(City))
+                    record = record.Where(x => x.City != null && x.City.ToLower().Contains(City.ToLower())).ToList();
 
                 res["success"] = 1;
                 res["businessList"] = record;
@@ -852,7 +861,7 @@ namespace Testing.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult UpdateBusinessawards(int achievementID, string Name,DateTime? _Date)
+        public JsonResult UpdateBusinessawards(int achievementID, string Name, DateTime? _Date)
         {
             Dictionary<string, object> res = new Dictionary<string, object>();
             try

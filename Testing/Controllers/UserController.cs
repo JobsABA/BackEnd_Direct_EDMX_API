@@ -20,9 +20,31 @@ namespace Testing.Controllers
         public ActionResult Index()
         {
             return View();
-        }JobsInABAEntities db = new JobsInABAEntities();
+        }
+        JobsInABAEntities db = new JobsInABAEntities();
         //
         // GET: /User/
+        public JsonResult GetUserList()
+        {
+            var record = db.Users.AsEnumerable().Where(x => x.IsDeleted == false).Select(x => new
+            {
+                UserName = x.UserName,
+                FirstName = x.FirstName,
+                MiddleName = x.MiddleName,
+                LastName = x.LastName,
+                UserID = x.UserID,
+                Email = x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault().Email != null ? x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault().Email.Address : "" : "",
+                PhoneNumber = x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault().Phone != null ? x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault().Phone.Number : "" : "",
+                AddressLine1 = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.Line1 : "" : "",
+                City = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.City : "" : "",
+                State = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.State : "" : "",
+                ZipCode = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.ZipCode : "" : "",
+                insdt = x.insdt,
+                IsActive = x.IsActive
+            }).ToList();
+            return Json(record, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult UserRegister(UserDataModel user, string password)
         {
             Dictionary<string, object> res = new Dictionary<string, object>();
