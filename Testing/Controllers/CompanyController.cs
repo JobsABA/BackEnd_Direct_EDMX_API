@@ -16,6 +16,7 @@ namespace Testing.Controllers
         //
         // GET: /Company/
         JobsInABAEntities db = new JobsInABAEntities();
+
         public JsonResult CompanyRegister(BussinessDataModel company)
         {
             Dictionary<string, object> res = new Dictionary<string, object>();
@@ -224,7 +225,7 @@ namespace Testing.Controllers
             Dictionary<string, object> res = new Dictionary<string, object>();
             try
             {
-                var lstBusiness = db.Businesses.ToList();
+                var lstBusiness = db.Businesses.Where(x => x.IsDeleted == false).ToList();
                 if (!string.IsNullOrEmpty(term))
                     lstBusiness = lstBusiness.Where(x => x.Name != null && x.Name.ToLower().Contains(term.ToLower())).ToList();
 
@@ -238,8 +239,11 @@ namespace Testing.Controllers
                     Name = x.Name,
                     BusinessID = x.BusinessID,
                     Description = x.Description,
+                    Email = x.BusinessEmails.FirstOrDefault() != null ? x.BusinessEmails.FirstOrDefault().Email != null ? x.BusinessEmails.FirstOrDefault().Email.Address : "" : "",
+                    PhoneNumber = x.BusinessPhones.FirstOrDefault() != null ? x.BusinessPhones.FirstOrDefault().Phone != null ? x.BusinessPhones.FirstOrDefault().Phone.Number : "" : "",
                     ImageExtension = x.BusinessImages.FirstOrDefault() != null ? x.BusinessImages.FirstOrDefault().Image != null ? x.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : "",
                     City = x.BusinessAddresses.FirstOrDefault() != null ? x.BusinessAddresses.FirstOrDefault().Address != null ? x.BusinessAddresses.FirstOrDefault().Address.City : "" : "",
+                    StartDate = x.StartDate
                 }).ToList();
 
                 if (!string.IsNullOrEmpty(City))

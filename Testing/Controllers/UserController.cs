@@ -24,24 +24,55 @@ namespace Testing.Controllers
         JobsInABAEntities db = new JobsInABAEntities();
         //
         // GET: /User/
-        public JsonResult GetUserList()
+        public JsonResult GetUserList(string username, string email, string number, string location, DateTime? datefrom, DateTime? dateTo)
         {
-            var record = db.Users.AsEnumerable().Where(x => x.IsDeleted == false).Select(x => new
+            var list = db.Users.Where(x => x.IsDeleted == false).ToList();
+
+            if (!string.IsNullOrEmpty(username))
+                list = list.Where(x => x.UserName != null && x.UserName.ToLower().Contains(username.ToLower())).ToList();
+
+            if (datefrom.HasValue && dateTo.HasValue)
+            {
+                list = list.Where(x => x.insdt >= datefrom && x.insdt <= dateTo).ToList();
+            }
+            if (datefrom.HasValue && !dateTo.HasValue)
+            {
+                list = list.Where(x => x.insdt >= datefrom).ToList();
+            }
+            if (!datefrom.HasValue && dateTo.HasValue)
+            {
+                list = list.Where(x => x.insdt <= dateTo).ToList();
+            }
+
+
+
+            var record = list.AsEnumerable().Select(x => new
             {
                 UserName = x.UserName,
                 FirstName = x.FirstName,
                 MiddleName = x.MiddleName,
                 LastName = x.LastName,
                 UserID = x.UserID,
-                Email = x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault().Email != null ? x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault().Email.Address : "" : "",
-                PhoneNumber = x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault().Phone != null ? x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault().Phone.Number : "" : "",
-                AddressLine1 = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.Line1 : "" : "",
-                City = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.City : "" : "",
-                State = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.State : "" : "",
-                ZipCode = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.ZipCode : "" : "",
+                UserEmailAddress = x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault().Email != null ? x.UserEmails.Where(c => c.IsPrimary == true).FirstOrDefault().Email.Address : "" : "",
+                UserPhoneNumber = x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault().Phone != null ? x.UserPhones.Where(c => c.IsPrimary == true).FirstOrDefault().Phone.Number : "" : "",
+                UserAddressLine1 = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.Line1 : "" : "",
+                UserAddressCity = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.City : "" : "",
+                UserAddressState = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.State : "" : "",
+                UserAddressZipCode = x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault() != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address != null ? x.UserAddresses.Where(c => c.IsPrimary == true).FirstOrDefault().Address.ZipCode : "" : "",
                 insdt = x.insdt,
-                IsActive = x.IsActive
-            }).ToList();
+                IsActive = x.IsActive,
+                Description = x.Description
+            }).OrderByDescending(x => x.insdt).ToList();
+
+            if (!string.IsNullOrEmpty(email))
+                record = record.Where(x => x.UserEmailAddress != null && x.UserEmailAddress.ToLower().Contains(email.ToLower())).ToList();
+
+            if (!string.IsNullOrEmpty(number))
+                record = record.Where(x => x.UserPhoneNumber != null && x.UserPhoneNumber.ToLower().Contains(number.ToLower())).ToList();
+
+            if (!string.IsNullOrEmpty(location))
+                record = record.Where(x => x.UserAddressState != null && x.UserAddressState.ToLower().Contains(location.ToLower())).ToList();
+
             return Json(record, JsonRequestBehavior.AllowGet);
         }
 
@@ -190,7 +221,9 @@ namespace Testing.Controllers
                         FirstName = z.FirstName,
                         LastName = z.LastName,
                         MiddleName = z.MiddleName,
-                        Description = z.Description
+                        Description = z.Description,
+                        UserName = z.UserName,
+
                     }).FirstOrDefault();
 
                     int userPhoneID = db.UserPhones.Where(z => z.UserID == userid && z.IsPrimary == true).FirstOrDefault() != null ? db.UserPhones.Where(z => z.UserID == userid && z.IsPrimary == true).FirstOrDefault().PhoneID : 0;
@@ -239,16 +272,17 @@ namespace Testing.Controllers
                 using (TransactionScope transaction = new TransactionScope())
                 {
 
-                    if (updateType == "Description")
+                    if (updateType == "Description" || updateType == "All")
                     {
                         var objUser = db.Users.Where(x => x.UserID == user.UserID).FirstOrDefault();
                         objUser.Description = user.Description;
                         objUser.upddt = DateTime.Now;
                         db.SaveChanges();
                     }
-                    if (updateType == "Name")
+                    if (updateType == "Name" || updateType == "All")
                     {
                         var objUser = db.Users.Where(x => x.UserID == user.UserID).FirstOrDefault();
+                        objUser.UserName = user.UserName;
                         objUser.FirstName = user.FirstName;
                         objUser.MiddleName = user.MiddleName;
                         objUser.LastName = user.LastName;
@@ -256,7 +290,7 @@ namespace Testing.Controllers
                         db.SaveChanges();
                     }
 
-                    if (updateType == "Address")
+                    if (updateType == "Address" || updateType == "All")
                     {
                         var userAddId = db.UserAddresses.Where(x => x.UserID == user.UserID && x.IsPrimary == true).FirstOrDefault() != null ? db.UserAddresses.Where(x => x.UserID == user.UserID && x.IsPrimary == true).FirstOrDefault().AddressID : 0;
                         var objAdd = db.Addresses.Where(x => x.AddressID == userAddId).FirstOrDefault();
@@ -270,7 +304,7 @@ namespace Testing.Controllers
                         }
                     }
 
-                    if (updateType == "Phone")
+                    if (updateType == "Phone" || updateType == "All")
                     {
                         var userPhoneId = db.UserPhones.Where(x => x.UserID == user.UserID && x.IsPrimary == true).FirstOrDefault() != null ? db.UserPhones.Where(x => x.UserID == user.UserID && x.IsPrimary == true).FirstOrDefault().PhoneID : 0;
                         var objPhone = db.Phones.Where(x => x.PhoneID == userPhoneId).FirstOrDefault();
@@ -281,7 +315,7 @@ namespace Testing.Controllers
                         }
                     }
 
-                    if (updateType == "Email")
+                    if (updateType == "Email" || updateType == "All")
                     {
                         var userEmailId = db.UserEmails.Where(x => x.UserID == user.UserID && x.IsPrimary == true).FirstOrDefault() != null ? db.UserEmails.Where(x => x.UserID == user.UserID && x.IsPrimary == true).FirstOrDefault().EmailID : 0;
                         var objEmail = db.Emails.Where(x => x.EmailID == userEmailId).FirstOrDefault();
@@ -304,6 +338,16 @@ namespace Testing.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult DeleteUser(int userID)
+        {
+            var objUser = db.Users.Where(x => x.UserID == userID).FirstOrDefault();
+            if (objUser != null)
+            {
+                objUser.IsDeleted = true;
+                db.SaveChanges();
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult AddUserawards(Achievement Userachievement)
         {
@@ -826,5 +870,16 @@ namespace Testing.Controllers
             // return RedirectToAction("AddProduct", "Product");
         }
 
+
+        //dashboard call
+        public JsonResult getDashboardData()
+        {
+            Dictionary<string, object> res = new Dictionary<string, object>();
+            res["TotalUser"] = db.Users.Where(x => x.IsDeleted == false).Count();
+            res["TotalCompany"] = db.Businesses.Where(x => x.IsDeleted == false).Count();
+            res["TotalJob"] = db.Jobs.Where(x => x.IsDeleted == false).Count();
+            res["TotalJobApplication"] = db.JobApplications.Count();
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
     }
 }
