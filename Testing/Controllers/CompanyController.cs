@@ -115,11 +115,13 @@ namespace Testing.Controllers
                 using (TransactionScope transaction = new TransactionScope())
                 {
                     Business oBusiness = db.Businesses.Where(x => x.BusinessID == company.BusinessID).FirstOrDefault();
-                    if (updateType == "Name" || updateType == "Description")
+                    if (updateType == "Name" || updateType == "Description" || updateType=="All")
                     {
                         if (oBusiness != null)
                         {
                             oBusiness.Name = company.Name;
+                            oBusiness.Abbreviation = company.Abbreviation;
+                            oBusiness.StartDate = company.StartDate;
                             oBusiness.Description = company.Description;
                             oBusiness.upddt = DateTime.Now;
                             db.SaveChanges();
@@ -129,7 +131,7 @@ namespace Testing.Controllers
                     Address oAddress = new Address();
                     int addressID = db.BusinessAddresses.Where(x => x.BusinessID == oBusiness.BusinessID).FirstOrDefault() != null ? db.BusinessAddresses.Where(x => x.BusinessID == oBusiness.BusinessID).FirstOrDefault().AddressID : 0;
                     oAddress = db.Addresses.Where(x => x.AddressID == addressID).FirstOrDefault();
-                    if (updateType == "Address")
+                    if (updateType == "Address" || updateType == "All")
                     {
                         if (!string.IsNullOrEmpty(company.BusinessAddressLine1) || !string.IsNullOrEmpty(company.BusinessAddressCity) || !string.IsNullOrEmpty(company.BusinessAddressState) || !string.IsNullOrEmpty(company.BusinessAddressZipCode))
                         {
@@ -145,7 +147,7 @@ namespace Testing.Controllers
                         }
                     }
 
-                    if (updateType == "Number")
+                    if (updateType == "Number" || updateType == "All")
                     {
                         if (!string.IsNullOrEmpty(company.BusinessPhoneNumber))
                         {
@@ -162,7 +164,7 @@ namespace Testing.Controllers
                         }
                     }
 
-                    if (updateType == "BussinessEmail")
+                    if (updateType == "BussinessEmail" || updateType == "All")
                     {
                         if (!string.IsNullOrEmpty(company.BusinessEmailAddress))
                         {
@@ -220,7 +222,7 @@ namespace Testing.Controllers
 
         }
 
-        public JsonResult GetBusinessList(string term, string companyName, string City)
+        public JsonResult GetBusinessList(string term, string companyName, string City, string email, string number, DateTime? datefrom, DateTime? dateTo)
         {
             Dictionary<string, object> res = new Dictionary<string, object>();
             try
@@ -234,20 +236,45 @@ namespace Testing.Controllers
                     lstBusiness = lstBusiness.Where(x => x.Name != null && x.Name.ToLower().Contains(companyName.ToLower())).ToList();
                 }
 
+                if (datefrom.HasValue && dateTo.HasValue)
+                {
+                    lstBusiness = lstBusiness.Where(x => x.StartDate >= datefrom && x.StartDate <= dateTo).ToList();
+                }
+                if (datefrom.HasValue && !dateTo.HasValue)
+                {
+                    lstBusiness = lstBusiness.Where(x => x.StartDate >= datefrom).ToList();
+                }
+                if (!datefrom.HasValue && dateTo.HasValue)
+                {
+                    lstBusiness = lstBusiness.Where(x => x.StartDate <= dateTo).ToList();
+                }
                 var record = lstBusiness.AsEnumerable().Select(x => new
                 {
                     Name = x.Name,
+                    Abbreviation=x.Abbreviation,
                     BusinessID = x.BusinessID,
                     Description = x.Description,
-                    Email = x.BusinessEmails.FirstOrDefault() != null ? x.BusinessEmails.FirstOrDefault().Email != null ? x.BusinessEmails.FirstOrDefault().Email.Address : "" : "",
-                    PhoneNumber = x.BusinessPhones.FirstOrDefault() != null ? x.BusinessPhones.FirstOrDefault().Phone != null ? x.BusinessPhones.FirstOrDefault().Phone.Number : "" : "",
+                    BusinessEmailAddress = x.BusinessEmails.FirstOrDefault() != null ? x.BusinessEmails.FirstOrDefault().Email != null ? x.BusinessEmails.FirstOrDefault().Email.Address : "" : "",
+                    BusinessPhoneNumber = x.BusinessPhones.FirstOrDefault() != null ? x.BusinessPhones.FirstOrDefault().Phone != null ? x.BusinessPhones.FirstOrDefault().Phone.Number : "" : "",
                     ImageExtension = x.BusinessImages.FirstOrDefault() != null ? x.BusinessImages.FirstOrDefault().Image != null ? x.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : "",
-                    City = x.BusinessAddresses.FirstOrDefault() != null ? x.BusinessAddresses.FirstOrDefault().Address != null ? x.BusinessAddresses.FirstOrDefault().Address.City : "" : "",
-                    StartDate = x.StartDate
-                }).ToList();
+                    BusinessAddressLine1 = x.BusinessAddresses.FirstOrDefault() != null ? x.BusinessAddresses.FirstOrDefault().Address != null ? x.BusinessAddresses.FirstOrDefault().Address.Line1 : "" : "",
+                    BusinessAddressCity = x.BusinessAddresses.FirstOrDefault() != null ? x.BusinessAddresses.FirstOrDefault().Address != null ? x.BusinessAddresses.FirstOrDefault().Address.City : "" : "",
+                    BusinessAddressState = x.BusinessAddresses.FirstOrDefault() != null ? x.BusinessAddresses.FirstOrDefault().Address != null ? x.BusinessAddresses.FirstOrDefault().Address.State : "" : "",
+                    BusinessAddressZipCode = x.BusinessAddresses.FirstOrDefault() != null ? x.BusinessAddresses.FirstOrDefault().Address != null ? x.BusinessAddresses.FirstOrDefault().Address.ZipCode : "" : "",
+                    StartDate = x.StartDate,
+                    IsActive = x.IsActive,
+                    
+
+                }).OrderByDescending(x=>x.StartDate).ToList();
 
                 if (!string.IsNullOrEmpty(City))
-                    record = record.Where(x => x.City != null && x.City.ToLower().Contains(City.ToLower())).ToList();
+                    record = record.Where(x => x.BusinessAddressCity != null && x.BusinessAddressCity.ToLower().Contains(City.ToLower())).ToList();
+
+                if (!string.IsNullOrEmpty(email))
+                    record = record.Where(x => x.BusinessEmailAddress != null && x.BusinessEmailAddress.ToLower().Contains(email.ToLower())).ToList();
+
+                if (!string.IsNullOrEmpty(number))
+                    record = record.Where(x => x.BusinessPhoneNumber != null && x.BusinessPhoneNumber.ToLower().Contains(number.ToLower())).ToList();
 
                 res["success"] = 1;
                 res["businessList"] = record;
@@ -389,6 +416,25 @@ namespace Testing.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
             // return RedirectToAction("AddProduct", "Product");
         }
+
+        public JsonResult DeleteCompany(int BusinessID)
+        {
+            try
+            {
+                var objCompoany = db.Businesses.Where(x => x.BusinessID == BusinessID).FirstOrDefault();
+                if (objCompoany != null)
+                {
+                    objCompoany.IsDeleted = true;
+                    db.SaveChanges();
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         //Business Employee,BusinessServices,Location,Awards
 
         #region for service
