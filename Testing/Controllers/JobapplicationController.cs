@@ -260,14 +260,18 @@ namespace Testing.Controllers
             try
             {
 
-                var objJobDetail = db.Jobs.AsEnumerable().Where(x => x.JobID == jobID).OrderByDescending(x => x.insdt).Select(z => new
+                var objJobDetail = db.Jobs.AsEnumerable().Where(x => x.JobID == jobID).OrderByDescending(x => x.insdt).Select(x => new
                 {
-                    Title = z.Title,
-                    StartDate = z.StartDate,
-                    EndDate = z.EndDate,
-                    insdt = z.insdt,
-                    Description = z.Description,
-                    JobID = z.JobID
+                    Title = x.Title,
+                    StartDate = x.StartDate,
+                    EndDate = x.EndDate,
+                    insdt = x.insdt,
+                    Description = x.Description,
+                    Name = db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault() != null ? db.Businesses.Where(z => z.BusinessID == x.BusinessID).FirstOrDefault().Name : "",
+                    JobID = x.JobID,
+                    ImageExtension = x.Business.BusinessImages.FirstOrDefault() != null ? x.Business.BusinessImages.FirstOrDefault().Image != null ? x.Business.BusinessImages.FirstOrDefault().Image.ImageExtension : "" : "",
+                    City = x.Business != null ? x.Business.BusinessAddresses != null ? x.Business.BusinessAddresses.FirstOrDefault() != null ? x.Business.BusinessAddresses.FirstOrDefault().Address != null ? x.Business.BusinessAddresses.FirstOrDefault().Address.City : "" : "" : "" : "",
+                    BusinessID = x.BusinessID
                 }).FirstOrDefault();
                 res["success"] = 1;
                 res["message"] = objJobDetail;

@@ -228,6 +228,8 @@
     <Content Include="FileUpload\posts\183667\images.jpg" />
     <Content Include="FileUpload\posts\183735\images.jpg" />
     <Content Include="FileUpload\posts\183735\valentines-day-recipes-for-two-183735-1454911233-promo.300x0c.jpg" />
+    <Content Include="FileUpload\posts\BlogAds-Vertical.png" />
+    <Content Include="FileUpload\posts\BlogAds.png" />
     <Content Include="FileUpload\UserImage\17.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

@@ -192,7 +192,7 @@ namespace Testing.Controllers
                         res["success"] = 1;
                         res["userId"] = objUser.UserID;
                         res["userName"] = objUser.UserName;
-                        res["Name"] = objUser.User.FirstName;
+                        res["Name"] = objUser.User.UserEmails.FirstOrDefault().Email.Address;
                     }
                     else
                     {
