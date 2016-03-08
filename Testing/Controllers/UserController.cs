@@ -90,6 +90,7 @@ namespace Testing.Controllers
                     objUser.FirstName = user.FirstName;
                     objUser.MiddleName = user.MiddleName;
                     objUser.LastName = user.LastName;
+                    objUser.DOB = user.DOB;
                     objUser.IsActive = true;
                     objUser.IsDeleted = false;
                     objUser.insdt = DateTime.Now;
@@ -191,6 +192,7 @@ namespace Testing.Controllers
                         res["success"] = 1;
                         res["userId"] = objUser.UserID;
                         res["userName"] = objUser.UserName;
+                        res["Name"] = objUser.User.FirstName;
                     }
                     else
                     {

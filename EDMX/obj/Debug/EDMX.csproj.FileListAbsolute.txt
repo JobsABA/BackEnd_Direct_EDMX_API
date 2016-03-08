@@ -18,3 +18,13 @@ D:\Hardik Working\JobsInABA\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\Entit
 D:\Hardik Working\JobsInABA\JobsABA_Hardiik_Direct_EDMX_API\EDMX\obj\Debug\EDMX.csprojResolveAssemblyReference.cache
 D:\Hardik Working\JobsInABA\JobsABA_Hardiik_Direct_EDMX_API\EDMX\obj\Debug\EDMX.dll
 D:\Hardik Working\JobsInABA\JobsABA_Hardiik_Direct_EDMX_API\EDMX\obj\Debug\EDMX.pdb
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\EDMX.dll.config
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\EDMX.dll
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\EDMX.pdb
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\EntityFramework.dll
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\EntityFramework.SqlServer.dll
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\EntityFramework.xml
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\bin\Debug\EntityFramework.SqlServer.xml
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\obj\Debug\EDMX.csprojResolveAssemblyReference.cache
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\obj\Debug\EDMX.dll
+D:\Hardik Working\JobsABA_Working\JobsABA_Hardiik_Direct_EDMX_API\EDMX\obj\Debug\EDMX.pdb
